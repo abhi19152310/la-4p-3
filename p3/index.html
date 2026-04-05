@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>React Image Gallery</title>
+
+    <style>
+        /* Main container */
+        .container {
+            width: 600px;
+            margin: 50px auto;
+            text-align: center;
+            font-family: Arial;
+        }
+
+        /* Large preview */
+        .preview {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+
+        .preview:hover {
+            transform: scale(1.02);
+        }
+
+        /* Thumbnails (Flexbox) */
+        .thumbnails {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* Thumbnail images */
+        .thumb {
+            width: 100px;
+            height: 70px;
+            object-fit: cover;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: transform 0.3s;
+        }
+
+        .thumb:hover {
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color:black;
+        }
+    </style>
+</head>
+<body>
+
+<div id="root"></div>
+
+<!-- React CDN -->
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+
+const { useState } = React;
+
+// Functional Component
+function Gallery() {
+
+    // Local images (same folder)
+    const images = [
+        "img-1.jpg",
+        "img2.jpg",
+        "img3.jpg",
+        "img4.jpg"
+    ];
+
+    // State for selected image
+    const [selectedImage, setSelectedImage] = useState(images[0]);
+
+    return (
+        <>
+            <div className="container">
+                <h2>My Image Gallery</h2>
+
+                {/* Large Preview */}
+                <img src={selectedImage} className="preview" />
+
+                {/* Thumbnails */}
+                <div className="thumbnails">
+                    {images.map((img, index) => (
+                        <img 
+                            key={index}
+                            src={img}
+                            className="thumb"
+                            onClick={() => setSelectedImage(img)}
+                        />
+                    ))}
+                </div>
+            </div>
+
+            {/* Name outside */}
+            <div className="footer">
+                <h1>D. Abhishek</h1>
+                <h1>24BKT0064</h1>
+            </div>
+        </>
+    );
+}
+
+// Render
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<Gallery />);
+
+</script>
+
+</body>
+</html>
